@@ -8,12 +8,12 @@ app.use(express.json());
 app.post("/calculate", (req, res) => {
   const { ku, pu } = req.body;
 
-  // Validate input
+  // Check if values are present and valid
   if (!ku || !pu || isNaN(ku) || isNaN(pu)) {
     return res.status(400).json({ error: "Invalid or missing Ku or Pu values." });
   }
 
-  // Ziegler–Nichols PID tuning (classic method)
+  // Ziegler–Nichols classic tuning method
   const Kp = 0.6 * ku;
   const Ki = (2 * Kp) / pu;
   const Kd = (Kp * pu) / 8;
